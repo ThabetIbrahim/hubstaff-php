@@ -1,10 +1,10 @@
 <?php 
 
 	define("App_Token","");
-	define("email","");
-	define("password","");
-
-
+	define("auth_token",""); 
+	
+	$_SESSION['root'] = $_SERVER['DOCUMENT_ROOT']."/sample_app/hubstaff/"; // Hhubstaff library directory
+	
 	define("BASE_URL","https://api.hubstaff.com/v1/");
 	define("AUTH","auth");
 	define("USERS","users");
@@ -32,20 +32,20 @@
 	define("WEEKLY_MY","weekly/my");
 
 	define("CUSTOM_DATE_TEAM","custom/by_date/team");
-	define("CUSTOM_DATE_MY","custom/by_date/MY");
+	define("CUSTOM_DATE_MY","custom/by_date/my");
 	define("CUSTOM_MEMBER_TEAM","custom/by_member/team");
 	define("CUSTOM_MEMBER_MY","custom/by_member/my");
 	define("CUSTOM_PROJECT_TEAM","custom/by_project/team");
 	define("CUSTOM_PROJECT_MY","custom/by_project/my");
 
-	require_once("./lib/auth.php");
-	require_once("./lib/users.php");
-	require_once("./lib/organizations.php");
-	require_once("./lib/projects.php");
-	require_once("./lib/activities.php");
-	require_once("./lib/screenshots.php");
-	require_once("./lib/notes.php");
-	require_once("./lib/weekly.php");
-	require_once("./lib/custom.php");
+	require_once($_SESSION['root']."lib/auth.php");
+	require_once($_SESSION['root']."lib/users.php");
+	require_once($_SESSION['root']."lib/organizations.php");
+	require_once($_SESSION['root']."lib/projects.php");
+	require_once($_SESSION['root']."lib/activities.php");
+	require_once($_SESSION['root']."lib/screenshots.php");
+	require_once($_SESSION['root']."lib/notes.php");
+	require_once($_SESSION['root']."lib/weekly.php");
+	require_once($_SESSION['root']."lib/custom.php");
 	
 ?>

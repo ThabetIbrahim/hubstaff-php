@@ -26,7 +26,6 @@
 			
 			$fields["offset"] = $offset;
 		
-		
 			$parameters["Auth-Token"] = "header";
 			$parameters["App-token"] = "header";
 			$parameters["start_time"] = "";
@@ -34,9 +33,8 @@
 			$parameters["offset"] = "";
 			
 			$curl = new curl();
-
-			$org_data = json_decode($curl->send($fields, $parameters, $url));		
-			return $org_data;	
+			$screenshots_data = json_decode($curl->send($fields, $parameters, $url));	
+			return $screenshots_data;	
 		}
 	}
 
