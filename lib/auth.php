@@ -6,6 +6,7 @@
 		{
 	   		public function auth($app_token, $email, $password,$url)
 			{
+				var_dump($app_token);
 				if(isset($_SESSION['Auth-Token']))
 				{
 					if($_SESSION['Auth-Token'])

@@ -1,7 +1,7 @@
 <?php 
 	
-	$_SESSION['root'] = $_SERVER['DOCUMENT_ROOT']."/hubstaff/"; // your hubstaff library Directory
-	 
+	$_SESSION['root'] = $_SERVER['DOCUMENT_ROOT']."/hubstaff/"; // your hubstaff directory
+	
 	define("BASE_URL","https://api.hubstaff.com/v1/");
 	define("AUTH","auth");
 	define("USERS","users");

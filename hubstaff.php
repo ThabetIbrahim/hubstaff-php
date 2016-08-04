@@ -14,7 +14,7 @@
 							$auth_token_file = fopen("store/auth.txt","r");
 							$app_token_file  = fopen("store/app.txt","r");
 							$_SESSION['Auth-Token'] = fread($auth_token_file,filesize("store/auth.txt"));						
-							$_SESSION['App-token'] = fread($app_token_file,filesize("store/app.txt"));						
+							$_SESSION['App-Token'] = fread($app_token_file,filesize("store/app.txt"));						
 						}
 	
 					}
@@ -30,19 +30,24 @@
 					return $auth_token["error"];
 				}
 				$_SESSION['Auth-Token'] = $auth_token["auth_token"];
-				$_SESSION['App-token'] = $app_token;
-				if(!is_file("store/auth.txt"))
+				$_SESSION['App-Token'] = $app_token;
+				if(!is_file($_SESSION['root']."store/auth.txt"))
 				{
-					$auth_token_file = fopen("store/auth.txt","w");
-					$app_token_file = fopen("store/app.txt","w");
+					if(!is_dir($_SESSION['root']."store"))
+					{
+						mkdir($_SESSION['root']."store");
+						chmod("store",0700);
+					}
+					$auth_token_file = fopen($_SESSION['root']."store/auth.txt","w");
+					$app_token_file = fopen($_SESSION['root']."store/app.txt","w");
 					chmod("store/auth.txt",0600);
 					chmod("store/app.txt",0600);
-					chmod("store",0700);
+					
 				}	
 				else 
 				{
-					$auth_token_file = fopen("store/auth.txt","w");
-					$app_token_file = fopen("store/app.txt","w");
+					$auth_token_file = fopen($_SESSION['root']."store/auth.txt","w");
+					$app_token_file = fopen($_SESSION['root']."store/app.txt","w");
 				}
 				fwrite($auth_token_file,$auth_token["auth_token"]);	
 				fwrite($app_token_file,$app_token);	

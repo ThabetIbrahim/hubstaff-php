@@ -37,8 +37,8 @@
 				
 				$curl = new curl;
 	
-				$act_data = json_decode($curl->send($fields, $parameters, $url));		
-				return $act_data;	
+				$org_data = json_decode($curl->send($fields, $parameters, $url));		
+				return $org_data;	
 			}
 		}
 	}

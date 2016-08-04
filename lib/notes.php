@@ -37,8 +37,8 @@
 				
 				$curl = new curl;
 	
-				$notes_data = json_decode($curl->send($fields, $parameters, $url));		
-				return $notes_data;	
+				$org_data = json_decode($curl->send($fields, $parameters, $url));		
+				return $org_data;	
 			}
 	
 			public function find_note($url)
@@ -51,8 +51,8 @@
 				
 				$curl = new curl;
 	
-				$note_data = json_decode($curl->send($fields, $parameters, $url));	
-				return $note_data;		
+				$user_data = json_decode($curl->send($fields, $parameters, $url));	
+				return $user_data;		
 			}
 		}
 	}
