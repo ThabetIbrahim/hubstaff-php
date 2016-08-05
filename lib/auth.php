@@ -6,6 +6,7 @@
 		{
 	   		public function auth($app_token, $email, $password,$url)
 			{
+				unset($_SESSION['Auth-Token']);
 				if(isset($_SESSION['Auth-Token']))
 				{
 					if($_SESSION['Auth-Token'])
@@ -30,6 +31,7 @@
 						$data['error'] =	$auth_data->error;
 					}
 				}
+
 				return $data;			
 				
 			}

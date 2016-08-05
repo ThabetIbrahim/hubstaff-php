@@ -33,8 +33,8 @@
 				$parameters["App-token"] = "header";
 				
 				$curl = new curl;
-				$weekly_data = json_decode($curl->send($fields, $parameters, $url));		
-				return $weekly_data;	
+				$org_data = json_decode($curl->send($fields, $parameters, $url));		
+				return $org_data;	
 			}
 	
 			public function weekly_my($options, $url)
@@ -68,8 +68,8 @@
 				
 				$curl = new curl;
 	
-				$weekly_data = json_decode($curl->send($fields, $parameters, $url));		
-				return $weekly_data;	
+				$org_data = json_decode($curl->send($fields, $parameters, $url));		
+				return $org_data;	
 			}
 	
 		}

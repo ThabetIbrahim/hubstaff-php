@@ -4,48 +4,47 @@
 		include("config.php");
 		class Client
 		{
-			function __construct() {
-				if(!isset($_SESSION['Auth-Token']) && !isset($_SESSION['App-Token']))
+			function __construct($app_token) {
+				$_SESSION['App-Token'] = $app_token;
+				if(!isset($_SESSION['Auth-Token']))
 				{
-					if(is_file("store/auth.txt") && is_file("store/app.txt"))
+					if(is_file($_SESSION['root']."store/auth.txt"))
 					{
-						if(filesize("store/auth.txt") > 0 && filesize("store/app.txt") > 0)
+						if(filesize("store/auth.txt") > 0)
 						{
 							$auth_token_file = fopen("store/auth.txt","r");
-							$app_token_file  = fopen("store/app.txt","r");
-							$_SESSION['Auth-Token'] = fread($auth_token_file,filesize("store/auth.txt"));						
-							$_SESSION['App-token'] = fread($app_token_file,filesize("store/app.txt"));						
+							$_SESSION['Auth-Token'] = fread($auth_token_file,$_SESSION['root'].filesize("store/auth.txt"));						
 						}
 	
 					}
 				}
 					
 			}	
-			public function auth($app_token, $email, $password)
+			public function auth($email, $password)
 			{
 				$auth = new Client\userauth;
-				$auth_token = $auth->auth($app_token, $email, $password, BASE_URL.AUTH);
+				if(!is_dir($_SESSION['root']."store"))
+				{
+					$auth_token["error"] = "Please create the store directory with 777 permission";
+					return $auth_token;
+				}
+				$auth_token = $auth->auth($_SESSION['App-Token'], $email, $password, BASE_URL.AUTH);
 				if(isset($auth_token["error"]))
 				{
 					return $auth_token["error"];
 				}
 				$_SESSION['Auth-Token'] = $auth_token["auth_token"];
-				$_SESSION['App-token'] = $app_token;
-				if(!is_file("store/auth.txt"))
-				{
-					$auth_token_file = fopen("store/auth.txt","w");
-					$app_token_file = fopen("store/app.txt","w");
-					chmod("store/auth.txt",0600);
-					chmod("store/app.txt",0600);
-					chmod("store",0700);
+				if(!is_file($_SESSION['root']."store/auth.txt"))
+				{			
+					$auth_token_file = fopen($_SESSION['root']."store/auth.txt","w");
+					chmod($_SESSION['root']."store/auth.txt",0600);					
 				}	
 				else 
 				{
-					$auth_token_file = fopen("store/auth.txt","w");
-					$app_token_file = fopen("store/app.txt","w");
+					$auth_token_file = fopen($_SESSION['root']."store/auth.txt","w");
 				}
-				fwrite($auth_token_file,$auth_token["auth_token"]);	
-				fwrite($app_token_file,$app_token);	
+				fwrite($auth_token_file,$auth_token["auth_token"]);
+				return 	$auth_token;
 			}
 			public function users($organization_memberships = 0, $project_memberships = 0, $offset = 0)
 			{
