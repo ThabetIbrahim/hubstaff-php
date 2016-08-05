@@ -6,12 +6,6 @@ A PHP toolkit for Hubstaff API.
 
 Include the ```hubstaff.php``` file in your project
 
-Use your personal ```APP_TOKEN``` found in your account settings to the config file.
-```
-  define("App_Token","<Hubstaff Application Token>");
-  define("email","<Hubstaff Account Email>");
-  define("password","<Hubstaff Account Password>");
-```
 ## Usage
 
 Calls for Hubstuff API v1 are relative to the base url https://api.hubstaff.com/v1/
@@ -65,7 +59,7 @@ List all users and organization or project memberships for each user.
 ```PHP
 
 include("hubstaff.php");
-$hubstaff = new hubstaff();
+$hubstaff = new hubstaff\Client($app_token);
 user = $hubstaff.users(true, true)
 
 # => {"users": [{ "id":..., "organanizations": ["id":...], "projects": ["id":...]}]}
@@ -79,7 +73,7 @@ Users can be looked up by their ``user_id``.
 ```PHP
 
 include("hubstaff.php");
-$hubstaff = new hubstaff();
+$hubstaff = new hubstaff\Client($app_token);
 json_data = $hubstaff.find_user(61188)
 
 # => {"user": { "id":...}}
