@@ -5,7 +5,8 @@
 		public $app_token = "JDzYL7shxiaCCx0_Hta3MT6WlgYWmZ1vqQa4Y91hM00";
 		function __construct()
 		{
-			include("../hubstaff.php");
+			if(!class_exists('hubstaff\Client'))
+				include("../hubstaff.php");
 			$this->hubstaff_api = new hubstaff\Client($this->app_token);
 		}		
 		public function organizations()
