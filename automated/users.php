@@ -6,7 +6,8 @@ ini_set("display_errors",1);
 		public $app_token = "";
 		function __construct()
 		{
-			include("../hubstaff.php");
+			if(!class_exists('hubstaff\Client'))
+				include("../hubstaff.php");
 			$this->hubstaff_api = new hubstaff\Client($this->app_token);
 		}		
 		public function users()
