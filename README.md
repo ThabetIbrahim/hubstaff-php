@@ -66,15 +66,15 @@ $password = "< your hubstaff account password >";
 
 $hubstaff = new hubstaff\Client($app_token);
 
-$hubstaff.auth(email,password);
+$hubstaff->auth(email,password);
 
-$auth_token = $_SESSION['Auth-Token'];
+$auth_token = $hubstaff->get_auth_token();
 
 ```
 ### You can list all users for a specific account, and get the details about the organization, and the projects they've worked on.
 
 ```php
-$hubstaff.users(1,1,0);
+$hubstaff->users(1,1,0);
 
 {
   "users": [
@@ -113,7 +113,7 @@ $hubstaff.users(1,1,0);
 ### You can find specific users by their``user_id``.
 
 ```php
-$hubstaff.find_user(61188);
+$hubstaff->find_user(61188);
 
 {
   "user": {
@@ -128,7 +128,7 @@ $hubstaff.find_user(61188);
 ### You can list all active projects.
 
 ```php
-$hubstaff.projects();
+$hubstaff->projects();
 
 {
   "projects": [
@@ -155,7 +155,7 @@ $hubstaff.projects();
 
 ```php
 
-$hubstaff.screenshots("2016-05-22", "2016-05-24", array("projects"=>"112761"));
+$hubstaff->screenshots("2016-05-22", "2016-05-24", array("projects"=>"112761"));
 
 {
   "screenshots": [
